@@ -15,7 +15,7 @@ class GameViewModel : ViewModel(){
 	
 	val gameBoard : StateFlow<List<String>> =_board
 	
-	var gameStatus = mutableStateOf("Vez do Jogador: X")
+	var gameStatus = mutableStateOf("Player X's turn")
 	var shouldReset = mutableStateOf(false)
 	
 	val winPatterns = listOf(
@@ -45,7 +45,7 @@ class GameViewModel : ViewModel(){
 		}
 		isPlayerX.value = !isPlayerX.value
 		val player = if(isPlayerX.value) "X" else "O"
-		gameStatus.value = "Vez do Jogador: $player"
+		gameStatus.value = "Player $player's turn"
 		defineWinner()
 	}
 	
@@ -55,18 +55,18 @@ class GameViewModel : ViewModel(){
 			val b = gameBoard.value[pattern[1]]
 			val c = gameBoard.value[pattern[2]]
 			if(a.isNotEmpty() && a == b && b == c){
-				gameStatus.value = "Jogador $a venceu"
+				gameStatus.value = "player $a won"
 				return
 			}
 		}
 		if(!gameBoard.value.contains("")){
-			gameStatus.value = "Empate"
+			gameStatus.value = "Draw"
 			return
 		}
 	}
 	
 	fun resetGame(){
-		gameStatus.value = "Vez do Jogador: X"
+		gameStatus.value = "Player X's turn"
 		shouldReset.value = false
 		isPlayerX.value = true
 		_board.value =MutableList(9) { "" }

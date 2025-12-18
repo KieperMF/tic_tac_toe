@@ -41,7 +41,7 @@ fun GameScreen(modifier: Modifier, viewModel: GameViewModel = viewModel ()){
 						modifier = Modifier
 							.size(width = 60.dp, height = 60.dp)
 							.clickable(
-								enabled = gameBoard[it].isEmpty() && viewModel.gameStatus.value.contains("Vez"),
+								enabled = gameBoard[it].isEmpty() && viewModel.gameStatus.value.contains("turn"),
 								onClick = {
 									viewModel.setBoardValue(it)
 								})
@@ -64,6 +64,6 @@ fun ResetButton(reset : () -> Unit){
 	Button(onClick = {
 		reset()
 	}) {
-		Text("Reiniciar")
+		Text("Reset")
 	}
 }
